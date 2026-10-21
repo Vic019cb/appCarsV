@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="#242424"
+    android:padding="14dp"
+    android:layout_marginBottom="12dp"
+    android:gravity="center_vertical">
+
+    <!-- Imagen representativa del vehículo (coche o moto deportiva) -->
+    <ImageView
+        android:id="@+id/imagenItemVehiculo"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="Vehículo registrado"
+        android:background="#1B1B1B"
+        android:src="@drawable/coche_deportivo"
+        android:layout_marginEnd="14dp"/>
+
+    <!-- Información del mantenimiento -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textoTituloItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Coche · Mantenimiento anual"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textoDetalleItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fecha: 21/10/2026 | 15000 km"
+            android:textColor="#CCCCCC"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp"/>
+
+        <TextView
+            android:id="@+id/textoCosteItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="150,00 €"
+            android:textColor="#80CBC4"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginTop="2dp"/>
+    </LinearLayout>
+
+    <!-- Indicador de pulsar para ver detalles -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="›"
+        android:textColor="#80CBC4"
+        android:textSize="26sp"
+        android:paddingStart="8dp"
+        android:paddingEnd="4dp"/>
+
+</LinearLayout>

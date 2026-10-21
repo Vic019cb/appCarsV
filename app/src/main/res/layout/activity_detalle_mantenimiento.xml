@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121212"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Detalle del mantenimiento"
+            android:textColor="#80CBC4"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Imagen deportiva con sentido en la app: muestra el vehículo concreto (coche o moto) -->
+        <ImageView
+            android:id="@+id/imagenDetalleVehiculo"
+            android:layout_width="match_parent"
+            android:layout_height="210dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/coche_deportivo"
+            android:contentDescription="Foto del vehículo deportivo"
+            android:background="#1E1E1E"
+            android:layout_marginBottom="18dp"/>
+
+        <!-- Contenedor con la ficha técnica del mantenimiento -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#242424"
+            android:padding="18dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:id="@+id/textoDetalleVehiculo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Vehículo: Coche"
+                android:textColor="#80CBC4"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/textoDetalleTipo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tipo: Mantenimiento anual"
+                android:textColor="#FFFFFF"
+                android:textSize="17sp"
+                android:layout_marginTop="8dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#383838"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"/>
+
+            <TextView
+                android:id="@+id/textoDetalleKm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kilómetros: 15.000 km"
+                android:textColor="#CCCCCC"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/textoDetalleFecha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fecha: 21/10/2026"
+                android:textColor="#CCCCCC"
+                android:textSize="15sp"
+                android:layout_marginTop="6dp"/>
+
+            <TextView
+                android:id="@+id/textoDetalleCoste"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Coste: 120,00 €"
+                android:textColor="#80CBC4"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/botonDetalleSonido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🔊 Escuchar motor del vehículo"
+            android:backgroundTint="#333333"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="10dp"/>
+
+        <Button
+            android:id="@+id/botonVolverDetalle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Volver al historial"
+            android:backgroundTint="#80CBC4"
+            android:textColor="#102020"/>
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121212"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="appCars"
+            android:textColor="#80CBC4"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:layout_marginTop="12dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mantenimiento de coches y motos"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:layout_marginTop="4dp"/>
+
+        <!-- Imagen principal: cambia dinámicamente al pulsar Coche o Moto -->
+        <ImageView
+            android:id="@+id/imagenPortada"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/coche_deportivo"
+            android:contentDescription="Imagen deportiva de cabecera"
+            android:background="#1E1E1E"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- Botones con altavoz para cambiar la imagen y emitir el sonido de motor -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+
+            <Button
+                android:id="@+id/botonSonidoCoche"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:text="🔊 🚗 COCHE"
+                android:backgroundTint="#242424"
+                android:textColor="#80CBC4"/>
+
+            <Button
+                android:id="@+id/botonSonidoMoto"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:text="🔊 🏍️ MOTO"
+                android:backgroundTint="#242424"
+                android:textColor="#80CBC4"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textoResumen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tus mantenimientos quedan guardados en este móvil."
+            android:textColor="#CCCCCC"
+            android:textSize="15sp"
+            android:layout_marginBottom="20dp"/>
+
+        <Button
+            android:id="@+id/botonAgregar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="AÑADIR MANTENIMIENTO"
+            android:backgroundTint="#80CBC4"
+            android:textColor="#102020"/>
+
+        <Button
+            android:id="@+id/botonHistorial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="VER HISTORIAL"
+            android:backgroundTint="#333333"
+            android:textColor="#FFFFFF"/>
+
+        <Button
+            android:id="@+id/botonProximaRevision"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="PRÓXIMA REVISIÓN"
+            android:backgroundTint="#333333"
+            android:textColor="#FFFFFF"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Puedes registrar mantenimiento anual, piezas, ruedas, luces y otras reparaciones."
+            android:textColor="#CCCCCC"
+            android:textSize="14sp"
+            android:layout_marginTop="24dp"/>
+    </LinearLayout>
+</ScrollView>

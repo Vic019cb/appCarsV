@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#121212"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/textoContador"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Historial de mantenimientos"
+        android:textColor="#80CBC4"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="6dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Toca cualquier registro para ver su ficha detallada."
+        android:textColor="#CCCCCC"
+        android:textSize="14sp"
+        android:layout_marginBottom="14dp"/>
+
+    <!-- Mensaje informativo cuando la lista esté vacía -->
+    <TextView
+        android:id="@+id/textoVacioHistorial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Todavía no hay mantenimientos guardados.\nAñade uno desde la pantalla principal para que aparezca aquí."
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:visibility="gone"
+        android:padding="16dp"/>
+
+    <!-- RecyclerView obligatorio para la lista según los requisitos del proyecto -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerHistorial"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <Button
+        android:id="@+id/botonVolver"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Volver al inicio"
+        android:backgroundTint="#80CBC4"
+        android:textColor="#102020"
+        android:layout_marginTop="12dp"/>
+</LinearLayout>

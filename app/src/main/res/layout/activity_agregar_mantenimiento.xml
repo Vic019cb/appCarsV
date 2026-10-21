@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121212"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nuevo mantenimiento"
+            android:textColor="#80CBC4"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="18dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Vehículo"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:layout_marginBottom="6dp"/>
+
+        <!-- Imagen que cambia al seleccionar Coche o Moto -->
+        <ImageView
+            android:id="@+id/imagenVehiculoFormulario"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/coche_deportivo"
+            android:contentDescription="Vehículo seleccionado"
+            android:background="#1E1E1E"
+            android:layout_marginBottom="12dp"/>
+
+        <RadioGroup
+            android:id="@+id/grupoVehiculo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
+
+            <RadioButton
+                android:id="@+id/radioCoche"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🔊 🚗 Coche"
+                android:textColor="#FFFFFF"
+                android:buttonTint="#80CBC4"
+                android:checked="true"
+                android:textSize="16sp"
+                android:layout_marginEnd="28dp"/>
+
+            <RadioButton
+                android:id="@+id/radioMoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🔊 🏍️ Moto"
+                android:textColor="#FFFFFF"
+                android:buttonTint="#80CBC4"
+                android:textSize="16sp"/>
+        </RadioGroup>
+
+        <Spinner
+            android:id="@+id/spinnerVehiculo"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="12dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tipo de revisión"
+            android:textColor="#FFFFFF"/>
+
+        <Spinner
+            android:id="@+id/spinnerTipo"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="8dp"/>
+
+        <EditText
+            android:id="@+id/editOtroTipo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Describe la otra reparación (si procede)"
+            android:inputType="textCapSentences"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#CCCCCC"
+            android:backgroundTint="#80CBC4"
+            android:layout_marginBottom="12dp"/>
+
+        <EditText
+            android:id="@+id/editKilometros"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Kilómetros actuales"
+            android:inputType="number"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#CCCCCC"
+            android:backgroundTint="#80CBC4"
+            android:layout_marginBottom="12dp"/>
+
+        <EditText
+            android:id="@+id/editFecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Fecha (toca para elegir)"
+            android:focusable="false"
+            android:clickable="true"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#CCCCCC"
+            android:backgroundTint="#80CBC4"
+            android:layout_marginBottom="12dp"/>
+
+        <EditText
+            android:id="@+id/editCoste"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Coste en euros"
+            android:inputType="numberDecimal"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#CCCCCC"
+            android:backgroundTint="#80CBC4"
+            android:layout_marginBottom="20dp"/>
+
+        <Button
+            android:id="@+id/btnGuardar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guardar mantenimiento"
+            android:backgroundTint="#80CBC4"
+            android:textColor="#102020"/>
+
+        <Button
+            android:id="@+id/btnCancelar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cancelar"
+            android:backgroundTint="#333333"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="8dp"/>
+    </LinearLayout>
+</ScrollView>
