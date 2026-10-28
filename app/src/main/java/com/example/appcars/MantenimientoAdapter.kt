@@ -10,9 +10,11 @@ import java.text.NumberFormat
 import java.util.Locale
 
 // Adaptador para el RecyclerView que enlaza cada registro de mantenimiento con su diseño visual.
+// Pasamos una segunda lambda para gestionar la pulsación larga y poder borrar el registro.
 class MantenimientoAdapter(
     private var lista: List<Mantenimiento>,
-    private val alPulsarElemento: (Mantenimiento) -> Unit
+    private val alPulsarElemento: (Mantenimiento) -> Unit,
+    private val alMantenerPulsado: (Mantenimiento) -> Unit
 ) : RecyclerView.Adapter<MantenimientoAdapter.MantenimientoViewHolder>() {
 
     // ViewHolder que almacena las referencias a las vistas de cada fila.
@@ -48,15 +50,21 @@ class MantenimientoAdapter(
             holder.imagenVehiculo.setImageResource(R.drawable.coche_deportivo)
         }
 
-        // Al hacer clic en la fila, ejecutamos la acción (abrir pantalla de detalle).
+        // Al hacer clic normal en la fila, abrimos los detalles.
         holder.itemView.setOnClickListener {
             alPulsarElemento(item)
+        }
+
+        // Al mantener pulsada la fila, ejecutamos la acción de borrado (requisito 8 del reto).
+        holder.itemView.setOnLongClickListener {
+            alMantenerPulsado(item)
+            true
         }
     }
 
     override fun getItemCount(): Int = lista.size
 
-    // Permite actualizar los datos del listado cuando cambia el historial.
+    // Permite actualizar los datos del listado cuando cambia la base de datos Room.
     fun actualizarDatos(nuevaLista: List<Mantenimiento>) {
         lista = nuevaLista
         notifyDataSetChanged()

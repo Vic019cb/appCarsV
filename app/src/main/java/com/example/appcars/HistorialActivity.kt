@@ -1,13 +1,17 @@
 package com.example.appcars
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.launch
 
 class HistorialActivity : ComponentActivity() {
 
@@ -27,37 +31,66 @@ class HistorialActivity : ComponentActivity() {
         // Configuramos el RecyclerView con un administrador de diseño lineal.
         recycler.layoutManager = LinearLayoutManager(this)
 
-        // Inicializamos el adaptador pasando la lista y la acción de clic (navegación con Intent y putExtra).
-        adaptador = MantenimientoAdapter(emptyList()) { mantenimiento ->
-            // Requisito del proyecto: navegación con Intent enviando datos con putExtra.
-            val intent = Intent(this, DetalleMantenimientoActivity::class.java).apply {
-                putExtra("EXTRA_VEHICULO", mantenimiento.vehiculo)
-                putExtra("EXTRA_TIPO", mantenimiento.tipo)
-                putExtra("EXTRA_KM", mantenimiento.kilometros)
-                putExtra("EXTRA_FECHA", mantenimiento.fecha)
-                putExtra("EXTRA_COSTE", mantenimiento.coste)
+        // Inicializamos el adaptador con dos funciones lambda:
+        // 1. Clic corto: abre la pantalla de detalles.
+        // 2. Clic largo: diálogo para borrar de la base de datos Room (reto 8).
+        adaptador = MantenimientoAdapter(
+            lista = emptyList(),
+            alPulsarElemento = { mantenimiento ->
+                val intent = Intent(this, DetalleMantenimientoActivity::class.java).apply {
+                    putExtra("EXTRA_VEHICULO", mantenimiento.vehiculo)
+                    putExtra("EXTRA_TIPO", mantenimiento.tipo)
+                    putExtra("EXTRA_KM", mantenimiento.kilometros)
+                    putExtra("EXTRA_FECHA", mantenimiento.fecha)
+                    putExtra("EXTRA_COSTE", mantenimiento.coste)
+                }
+                startActivity(intent)
+            },
+            alMantenerPulsado = { mantenimiento ->
+                // Confirmamos antes de borrar para evitar eliminar por error
+                AlertDialog.Builder(this)
+                    .setTitle("Eliminar mantenimiento")
+                    .setMessage("¿Deseas eliminar el registro de ${mantenimiento.vehiculo} (${mantenimiento.tipo})?")
+                    .setPositiveButton("Eliminar") { _, _ ->
+                        // Borramos de Room en segundo plano
+                        lifecycleScope.launch {
+                            val dao = AppDatabase.obtener(this@HistorialActivity).mantenimientoDao()
+                            dao.borrar(mantenimiento)
+                            Toast.makeText(this@HistorialActivity, "Mantenimiento eliminado", Toast.LENGTH_SHORT).show()
+                            cargarHistorialDesdeBd() // Refrescamos la lista para que desaparezca
+                        }
+                    }
+                    .setNegativeButton("Cancelar", null)
+                    .show()
             }
-            startActivity(intent)
-        }
+        )
         recycler.adapter = adaptador
 
         findViewById<Button>(R.id.botonVolver).setOnClickListener { finish() }
     }
 
-    // Se recarga al entrar para mostrar también lo que se acaba de registrar en SharedPreferences.
+    // Regla del apartado 6: cargamos la lista en onResume para que siempre se refresque al volver de otra pantalla.
     override fun onResume() {
         super.onResume()
-        val lista = DatosMantenimiento.obtener(this)
-        textoContador.text = "Historial (${lista.size})"
+        cargarHistorialDesdeBd()
+    }
 
-        if (lista.isEmpty()) {
-            textoVacio.visibility = View.VISIBLE
-            recycler.visibility = View.GONE
-        } else {
-            textoVacio.visibility = View.GONE
-            recycler.visibility = View.VISIBLE
-            // Mostramos los registros en orden inverso para que el más reciente aparezca primero.
-            adaptador.actualizarDatos(lista.asReversed())
+    // Lee los datos desde Room usando corrutinas (lifecycleScope.launch) para no congelar la pantalla.
+    private fun cargarHistorialDesdeBd() {
+        lifecycleScope.launch {
+            val dao = AppDatabase.obtener(this@HistorialActivity).mantenimientoDao()
+            val lista = dao.obtenerTodas()
+            textoContador.text = "Historial (${lista.size})"
+
+            if (lista.isEmpty()) {
+                textoVacio.visibility = View.VISIBLE
+                recycler.visibility = View.GONE
+            } else {
+                textoVacio.visibility = View.GONE
+                recycler.visibility = View.VISIBLE
+                // Como el DAO ya ordena por "ORDER BY id DESC", pasamos la lista directamente
+                adaptador.actualizarDatos(lista)
+            }
         }
     }
 }

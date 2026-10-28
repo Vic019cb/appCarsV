@@ -12,6 +12,8 @@ import android.widget.RadioButton
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -94,7 +96,7 @@ class AgregarMantenimientoActivity : ComponentActivity() {
 
         botonCancelar.setOnClickListener { finish() }
 
-        // Validamos el formulario y guardamos en SharedPreferences
+        // Validamos el formulario y guardamos en la base de datos Room
         botonGuardar.setOnClickListener {
             val kmValor = campoKm.text.toString().trim().toIntOrNull()
             val costeValor = campoCoste.text.toString().trim().replace(',', '.').toDoubleOrNull()
@@ -125,9 +127,13 @@ class AgregarMantenimientoActivity : ComponentActivity() {
                         fecha = campoFecha.text.toString().trim(),
                         coste = costeValor
                     )
-                    DatosMantenimiento.guardar(this, nuevo)
-                    Toast.makeText(this, "Mantenimiento guardado correctamente", Toast.LENGTH_SHORT).show()
-                    finish()
+                    // Conectamos con Room dentro de lifecycleScope.launch (Regla del apartado 3)
+                    lifecycleScope.launch {
+                        val dao = AppDatabase.obtener(this@AgregarMantenimientoActivity).mantenimientoDao()
+                        dao.insertar(nuevo)
+                        Toast.makeText(this@AgregarMantenimientoActivity, "Mantenimiento guardado en la base de datos", Toast.LENGTH_SHORT).show()
+                        finish()
+                    }
                 }
             }
         }

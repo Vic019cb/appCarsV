@@ -6,6 +6,8 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.ComponentActivity
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
 
@@ -40,15 +42,18 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    // Cada vez que volvemos a la pantalla principal, actualizamos el contador con los datos de SharedPreferences
+    // Cada vez que volvemos a la pantalla principal, consultamos Room para actualizar el contador
     override fun onResume() {
         super.onResume()
-        val total = DatosMantenimiento.obtener(this).size
-        val textoResumen = findViewById<TextView>(R.id.textoResumen)
-        if (total == 1) {
-            textoResumen.text = "Hay 1 mantenimiento guardado."
-        } else {
-            textoResumen.text = "Hay $total mantenimientos guardados."
+        lifecycleScope.launch {
+            val dao = AppDatabase.obtener(this@MainActivity).mantenimientoDao()
+            val total = dao.contarMantenimientos()
+            val textoResumen = findViewById<TextView>(R.id.textoResumen)
+            if (total == 1) {
+                textoResumen.text = "Hay 1 mantenimiento guardado en la base de datos."
+            } else {
+                textoResumen.text = "Hay $total mantenimientos guardados en la base de datos."
+            }
         }
     }
 
