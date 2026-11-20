@@ -18,7 +18,19 @@
             android:textColor="#80CBC4"
             android:textSize="26sp"
             android:textStyle="bold"
-            android:layout_marginBottom="18dp"/>
+            android:layout_marginBottom="12dp"/>
+
+        <!-- Nuevo Proyecto V2: Aviso que aparece solo cuando el usuario viene desde un modelo del Catálogo Online -->
+        <TextView
+            android:id="@+id/tvModeloSeleccionadoApi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#242424"
+            android:padding="10dp"
+            android:textColor="#80CBC4"
+            android:textSize="14sp"
+            android:visibility="gone"
+            android:layout_marginBottom="12dp"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -128,6 +140,65 @@
             android:textColor="#FFFFFF"
             android:textColorHint="#CCCCCC"
             android:backgroundTint="#80CBC4"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Modificacion: Sección de fotografía (Cámara y Galería) con botones e ImageView de previsualización -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fotografía del mantenimiento (opcional)"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Modificacion: Botón para hacer una foto con la cámara del dispositivo -->
+        <Button
+            android:id="@+id/btnFoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📷 Hacer foto"
+            android:backgroundTint="#242424"
+            android:textColor="#80CBC4"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Modificacion: Botón para elegir una imagen desde la galería del sistema -->
+        <Button
+            android:id="@+id/btnGaleria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🖼️ Elegir de la galería"
+            android:backgroundTint="#242424"
+            android:textColor="#80CBC4"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Modificacion: ImageView donde se muestra la fotografía tomada con la cámara o elegida de la galería -->
+        <ImageView
+            android:id="@+id/ivFoto"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="centerInside"
+            android:background="#1E1E1E"
+            android:contentDescription="Foto del mantenimiento"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Modificacion: Sección de ubicación GPS (Botón y TextView de coordenadas) -->
+        <Button
+            android:id="@+id/btnUbicacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📍 Obtener mi ubicación"
+            android:backgroundTint="#242424"
+            android:textColor="#80CBC4"
+            android:layout_marginBottom="6dp"/>
+
+        <!-- Modificacion: TextView que muestra las coordenadas de latitud y longitud obtenidas por el GPS -->
+        <TextView
+            android:id="@+id/tvUbicacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ubicación: sin obtener"
+            android:textColor="#CCCCCC"
+            android:textSize="14sp"
             android:layout_marginBottom="20dp"/>
 
         <Button

@@ -40,6 +40,10 @@ class MainActivity : ComponentActivity() {
         findViewById<Button>(R.id.botonProximaRevision).setOnClickListener {
             startActivity(Intent(this, ProximaRevisionActivity::class.java))
         }
+        // Nuevo Proyecto V2: Abre la pantalla del catálogo online conectado a la API pública NHTSA y caché Room
+        findViewById<Button>(R.id.botonCatalogoOnline).setOnClickListener {
+            startActivity(Intent(this, CatalogoOnlineActivity::class.java))
+        }
     }
 
     // Cada vez que volvemos a la pantalla principal, consultamos Room para actualizar el contador

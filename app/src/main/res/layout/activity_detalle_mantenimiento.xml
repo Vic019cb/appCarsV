@@ -91,7 +91,28 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_marginTop="8dp"/>
+
+            <!-- Modificacion: TextView para mostrar las coordenadas GPS guardadas en la ficha de detalle del mantenimiento -->
+            <TextView
+                android:id="@+id/textoDetalleUbicacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ubicación: sin registrar"
+                android:textColor="#CCCCCC"
+                android:textSize="15sp"
+                android:layout_marginTop="8dp"/>
         </LinearLayout>
+
+        <!-- Modificacion: ImageView para mostrar en grande la foto tomada o elegida de la galería para este mantenimiento -->
+        <ImageView
+            android:id="@+id/ivFotoDetalle"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:background="#1E1E1E"
+            android:contentDescription="Fotografía adjunta al mantenimiento"
+            android:visibility="gone"
+            android:layout_marginBottom="16dp"/>
 
         <Button
             android:id="@+id/botonDetalleSonido"
