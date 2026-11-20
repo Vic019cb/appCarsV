@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Nuevo Proyecto V2: Pantalla principal del catálogo online conectado a la API NHTSA y con caché en Room -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#121212"
+    android:padding="18dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Catálogo Online (API)"
+        android:textColor="#80CBC4"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="4dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Consulta modelos reales desde Internet (NHTSA) y guárdalos en Room para verlos sin conexión."
+        android:textColor="#CCCCCC"
+        android:textSize="13sp"
+        android:layout_marginBottom="12dp"/>
+
+    <!-- Buscador por marca para hacer la petición GET a la API -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="8dp">
+
+        <EditText
+            android:id="@+id/editBuscarMarca"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Marca (ej: Seat, Toyota, Audi)"
+            android:inputType="textCapWords"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#AAAAAA"
+            android:backgroundTint="#80CBC4"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/botonBuscarApi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Buscar"
+            android:backgroundTint="#80CBC4"
+            android:textColor="#102020"/>
+    </LinearLayout>
+
+    <!-- Accesos rápidos de marcas populares para probar la API con un solo toque -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+
+        <Button
+            android:id="@+id/btnMarcaToyota"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="4dp"
+            android:text="Toyota"
+            android:textSize="12sp"
+            android:padding="0dp"
+            android:backgroundTint="#242424"
+            android:textColor="#80CBC4"/>
+
+        <Button
+            android:id="@+id/btnMarcaAudi"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="4dp"
+            android:text="Audi"
+            android:textSize="12sp"
+            android:padding="0dp"
+            android:backgroundTint="#242424"
+            android:textColor="#80CBC4"/>
+
+        <Button
+            android:id="@+id/btnMarcaHonda"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="4dp"
+            android:text="Honda"
+            android:textSize="12sp"
+            android:padding="0dp"
+            android:backgroundTint="#242424"
+            android:textColor="#80CBC4"/>
+
+        <Button
+            android:id="@+id/btnMarcaFord"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:text="Ford"
+            android:textSize="12sp"
+            android:padding="0dp"
+            android:backgroundTint="#242424"
+            android:textColor="#80CBC4"/>
+    </LinearLayout>
+
+    <!-- Mejora propia: filtro rápido local y botón para ver solo favoritos guardados -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="10dp">
+
+        <EditText
+            android:id="@+id/editFiltroRapido"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Filtrar modelo en la lista..."
+            android:inputType="text"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#AAAAAA"
+            android:backgroundTint="#555555"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/botonSoloFavoritos"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="⭐ Favoritos"
+            android:textSize="12sp"
+            android:backgroundTint="#333333"
+            android:textColor="#FFD54F"/>
+    </LinearLayout>
+
+    <!-- Cartel informativo del estado actual (Online, Modo Sin Conexión o Error) -->
+    <TextView
+        android:id="@+id/textoEstadoApi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#1E1E1E"
+        android:padding="10dp"
+        android:text="Listo para consultar la API."
+        android:textColor="#80CBC4"
+        android:textSize="13sp"
+        android:layout_marginBottom="10dp"/>
+
+    <!-- Rueda de carga visible mientras Retrofit espera la respuesta de Internet -->
+    <ProgressBar
+        android:id="@+id/progressCargandoApi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginVertical="12dp"
+        android:visibility="gone"/>
+
+    <!-- Mensaje cuando no hay resultados que enseñar -->
+    <TextView
+        android:id="@+id/textoSinResultadosApi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No hay modelos para mostrar con este filtro."
+        android:textColor="#CCCCCC"
+        android:textSize="15sp"
+        android:padding="14dp"
+        android:visibility="gone"/>
+
+    <!-- Lista RecyclerView con los modelos obtenidos de la API o de la caché de Room -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerCatalogoApi"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <Button
+        android:id="@+id/botonVolverCatalogo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Volver al inicio"
+        android:backgroundTint="#333333"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="10dp"/>
+
+</LinearLayout>

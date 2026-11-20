@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Modificacion: Configuración de rutas para que FileProvider permita guardar las fotos de la cámara en la carpeta interna "fotos/" -->
+<paths>
+    <files-path name="fotos" path="fotos/" />
+</paths>

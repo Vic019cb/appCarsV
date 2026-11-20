@@ -43,6 +43,15 @@ class HistorialActivity : ComponentActivity() {
                     putExtra("EXTRA_KM", mantenimiento.kilometros)
                     putExtra("EXTRA_FECHA", mantenimiento.fecha)
                     putExtra("EXTRA_COSTE", mantenimiento.coste)
+                    // Modificacion: Enviamos también la ruta de la foto y las coordenadas GPS a la pantalla de detalle
+                    putExtra("EXTRA_FOTO_PATH", mantenimiento.fotoPath)
+                    if (mantenimiento.latitud != null && mantenimiento.longitud != null) {
+                        putExtra("EXTRA_TIENE_UBICACION", true)
+                        putExtra("EXTRA_LATITUD", mantenimiento.latitud)
+                        putExtra("EXTRA_LONGITUD", mantenimiento.longitud)
+                    } else {
+                        putExtra("EXTRA_TIENE_UBICACION", false)
+                    }
                 }
                 startActivity(intent)
             },

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Nuevo Proyecto V2: Diseño visual de cada fila del catálogo online de vehículos -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="#242424"
+    android:padding="14dp"
+    android:layout_marginBottom="10dp"
+    android:gravity="center_vertical">
+
+    <!-- Miniatura coherente con el resto de appCars -->
+    <ImageView
+        android:id="@+id/imagenItemModeloApi"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/coche_deportivo"
+        android:background="#1B1B1B"
+        android:contentDescription="Imagen de vehículo del catálogo"
+        android:layout_marginEnd="14dp"/>
+
+    <!-- Datos principales del modelo traídos de la API o de la caché de Room -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textoNombreModeloApi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ibiza"
+            android:textColor="#FFFFFF"
+            android:textSize="17sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textoMarcaModeloApi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Marca: SEAT · ID: 2043"
+            android:textColor="#CCCCCC"
+            android:textSize="13sp"
+            android:layout_marginTop="4dp"/>
+
+        <TextView
+            android:id="@+id/textoOrigenModeloApi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guardado en Room"
+            android:textColor="#80CBC4"
+            android:textSize="12sp"
+            android:layout_marginTop="2dp"/>
+    </LinearLayout>
+
+    <!-- Mejora propia: botón de estrella para marcar o quitar de favoritos -->
+    <TextView
+        android:id="@+id/botonFavoritoItemApi"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:gravity="center"
+        android:text="☆"
+        android:textColor="#FFD54F"
+        android:textSize="26sp"
+        android:contentDescription="Marcar como favorito"/>
+
+    <!-- Flechita que indica que se puede tocar la fila para abrir el detalle -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="›"
+        android:textColor="#80CBC4"
+        android:textSize="26sp"
+        android:paddingStart="6dp"
+        android:paddingEnd="2dp"/>
+
+</LinearLayout>

@@ -23,6 +23,8 @@ class MantenimientoAdapter(
         val textoTitulo: TextView = vista.findViewById(R.id.textoTituloItem)
         val textoDetalle: TextView = vista.findViewById(R.id.textoDetalleItem)
         val textoCoste: TextView = vista.findViewById(R.id.textoCosteItem)
+        // Modificacion: Referencia al ImageView de la fila donde se muestra la foto capturada si el mantenimiento tiene una
+        val ivFoto: ImageView = vista.findViewById(R.id.ivFotoFila)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MantenimientoViewHolder {
@@ -35,9 +37,19 @@ class MantenimientoAdapter(
     override fun onBindViewHolder(holder: MantenimientoViewHolder, position: Int) {
         val item = lista[position]
 
+        // Modificacion: Si el mantenimiento tiene coordenadas GPS guardadas, las formateamos con 4 decimales como en el Bestiario
+        val lat = item.latitud
+        val lon = item.longitud
+        val coordenadas = if (lat != null && lon != null) {
+            "  (" + "%.4f".format(lat) + ", " + "%.4f".format(lon) + ")"
+        } else {
+            ""
+        }
+
         // Mostramos el título con el vehículo y tipo de mantenimiento.
         holder.textoTitulo.text = "${item.vehiculo} · ${item.tipo}"
-        holder.textoDetalle.text = "Fecha: ${item.fecha} | ${item.kilometros} km"
+        // Modificacion: Añadimos las coordenadas al texto de detalle de la fila si existen
+        holder.textoDetalle.text = "Fecha: ${item.fecha} | ${item.kilometros} km$coordenadas"
 
         // Formateamos el coste a moneda euros.
         val formatoMoneda = NumberFormat.getCurrencyInstance(Locale("es", "ES"))
@@ -48,6 +60,15 @@ class MantenimientoAdapter(
             holder.imagenVehiculo.setImageResource(R.drawable.moto_deportiva)
         } else {
             holder.imagenVehiculo.setImageResource(R.drawable.coche_deportivo)
+        }
+
+        // Modificacion: Cargamos la foto del mantenimiento con Fotos.cargar y usamos VISIBLE / GONE obligatorio para que al reciclar filas no se mezclen fotos (Apartado 7 del PDF)
+        val bitmap = Fotos.cargar(item.fotoPath)
+        if (bitmap != null) {
+            holder.ivFoto.setImageBitmap(bitmap)
+            holder.ivFoto.visibility = View.VISIBLE
+        } else {
+            holder.ivFoto.visibility = View.GONE
         }
 
         // Al hacer clic normal en la fila, abrimos los detalles.

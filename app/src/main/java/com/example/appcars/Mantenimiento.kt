@@ -13,5 +13,9 @@ data class Mantenimiento(
     val tipo: String,
     val kilometros: Int,
     val fecha: String,
-    val coste: Double
+    val coste: Double,
+    // Modificacion: Campos opcionales con valor por defecto null para guardar las coordenadas GPS y la ruta de la foto en Room
+    val latitud: Double? = null,
+    val longitud: Double? = null,
+    val fotoPath: String? = null
 )

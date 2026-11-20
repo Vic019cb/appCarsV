@@ -53,6 +53,16 @@
             android:textSize="14sp"
             android:textStyle="bold"
             android:layout_marginTop="2dp"/>
+
+        <!-- Modificacion: ImageView de la fila con visibility="gone" por defecto para enseñar la foto tomada solo si existe (Apartado 7 del PDF) -->
+        <ImageView
+            android:id="@+id/ivFotoFila"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginTop="8dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="Foto adjunta al mantenimiento"
+            android:visibility="gone"/>
     </LinearLayout>
 
     <!-- Indicador de pulsar para ver detalles -->

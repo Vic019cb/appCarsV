@@ -1,28 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- Modificacion: Permiso para utilizar la cámara -->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <!-- Modificacion: Permiso para conocer la ubicación precisa -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <!-- Modificacion: Permiso para conocer la ubicación aproximada -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!-- Nuevo Proyecto V2: Permiso obligatorio para que la app pueda consultar la API en Internet -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+
     <application
         android:allowBackup="true"
         android:label="appCars"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCars">
 
-        <!-- Pantalla de detalle de cada mantenimiento (abre imagen y datos con putExtra) -->
+        <!-- Nuevo Proyecto V2: Pantalla del catálogo online que consulta la API y muestra la caché de Room -->
+        <activity
+            android:name=".CatalogoOnlineActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Nuevo Proyecto V2: Pantalla de detalle ampliado de un modelo consultado en la API -->
+        <activity
+            android:name=".DetalleModeloActivity"
+            android:exported="false" />
+
+        <!-- Pantalla de detalle de cada mantenimiento -->
         <activity
             android:name=".DetalleMantenimientoActivity"
             android:exported="false" />
 
-        <!-- Pantalla para consultar la próxima revisión calculada -->
+        <!-- Pantalla para consultar la próxima revisión -->
         <activity
             android:name=".ProximaRevisionActivity"
             android:exported="false" />
 
-        <!-- Pantalla con la lista de mantenimientos (RecyclerView) -->
+        <!-- Pantalla con la lista de mantenimientos -->
         <activity
             android:name=".HistorialActivity"
             android:exported="false" />
 
-        <!-- Pantalla de formulario para registrar nuevo mantenimiento -->
+        <!-- Pantalla de formulario para registrar mantenimiento -->
         <activity
             android:name=".AgregarMantenimientoActivity"
             android:exported="false"
@@ -33,11 +61,27 @@
             android:name=".MainActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+
+        <!-- Modificacion: FileProvider que permite a la cámara guardar fotografías dentro de AppCars -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+
+        </provider>
+
     </application>
 
 </manifest>
